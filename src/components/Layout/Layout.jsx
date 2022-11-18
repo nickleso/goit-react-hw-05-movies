@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -45,6 +45,7 @@ const Layout = () => {
           <Link to="/movies">Movies</Link>
         </nav>
       </Header>
+      <Outlet />
     </Container>
   );
 };

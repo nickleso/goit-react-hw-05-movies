@@ -1,17 +1,57 @@
-import styled from 'styled-components';
-
-export const Container = styled.div`
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 16px;
-`;
+import { useState, useEffect } from 'react';
+// import { useSearchParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import SerchBar from 'components/SerchBar/SerchBar';
+import fetchFilmsByQuery from 'MoviesAPI/fetchFilmsByQuery';
 
 const Movies = () => {
+  const [filmName, setFilmName] = useState('');
+  const [filmsByQ, setFilmsByQ] = useState([]);
+  // const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    if (!filmName) {
+      return;
+    }
+
+    async function fetchFilms() {
+      try {
+        const films = await fetchFilmsByQuery(filmName);
+
+        if (films.results.length < 1) {
+          return alert('No Films on your query');
+        }
+
+        setFilmsByQ(films.results);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchFilms();
+  }, [filmName]);
+
+  const handleFormSubmit = searchFilm => {
+    if (searchFilm === filmName) {
+      return;
+    }
+
+    setFilmName(searchFilm);
+    // setPage(1);
+    setFilmsByQ([]);
+  };
+
   return (
     <main>
-      <Container>
-        <h1>Movies</h1>
-      </Container>
+      <SerchBar onSubmit={handleFormSubmit} />
+      <ul>
+        {filmsByQ.length > 0 &&
+          filmsByQ.map(({ id, title, name }) => (
+            <li key={id}>
+              <Link to={`${id}`}>{title || name}</Link>
+            </li>
+          ))}
+      </ul>
     </main>
   );
 };
