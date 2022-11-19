@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Outlet, useParams, useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import fetchFilmsById from 'MoviesAPI/fetchFilmsById';
+import { BiLeftArrowCircle } from 'react-icons/bi';
 
 const BASE_IMAGES_URL = 'https://image.tmdb.org/t/p/w400';
 
@@ -55,9 +56,26 @@ const MovieDetails = () => {
 
   return (
     <main>
-      <Link to={backLinkHref}>Go back</Link>
+      <Link
+        to={backLinkHref}
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'space-around',
+          border: '1px solid blue',
+          borderColor: 'blue',
+          borderRadius: 5,
+          width: 100,
+          height: 40,
+          color: 'blue',
+        }}
+      >
+        <BiLeftArrowCircle size={20} />
+        Go back
+      </Link>
       <div
         style={{
+          paddingTop: 16,
           display: 'flex',
           gap: 10,
         }}
@@ -84,11 +102,7 @@ const MovieDetails = () => {
 
       <div>
         <h3>Additional information</h3>
-        <ul
-          style={{
-            listStyle: 'none',
-          }}
-        >
+        <ul>
           <li>
             <Link to="cast">Cast</Link>
           </li>

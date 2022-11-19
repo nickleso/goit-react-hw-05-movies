@@ -10,7 +10,6 @@ import NotFound from '../Pages/NotFound/NotFound';
 export const App = () => {
   return (
     <>
-      {/* <Layout /> */}
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />

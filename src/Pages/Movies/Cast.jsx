@@ -29,14 +29,6 @@ const Cast = () => {
     return null;
   }
 
-  const imageFunction = profile_path => {
-    if (profile_path) {
-      return BASE_IMAGES_URL + profile_path;
-    }
-
-    // return defaultPicture;
-  };
-
   return (
     <div>
       <ul
@@ -57,11 +49,14 @@ const Cast = () => {
             >
               <img
                 width="150px"
-                src={imageFunction(profile_path)}
+                src={
+                  profile_path
+                    ? BASE_IMAGES_URL + profile_path
+                    : 'https://dummyimage.com/200x300/bab8ba/000&text=no+photo'
+                }
                 alt={name || original_name || 'no info'}
               />
               <h4>{name || original_name || 'no info'}</h4>
-              {/* <p>play as: {character || 'no info'}</p> */}
             </li>
           ))}
       </ul>
