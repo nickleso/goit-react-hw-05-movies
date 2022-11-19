@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Outlet, useParams, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import fetchFilmsById from 'MoviesAPI/fetchFilmsById';
-// import styled from 'styled-components';
 
 const BASE_IMAGES_URL = 'https://image.tmdb.org/t/p/w400';
 
 const MovieDetails = () => {
   const { id } = useParams();
   const [filmInfo, setFilmInfo] = useState(null);
+  const location = useLocation();
+  const backLinkHref = location.state?.from ?? '/movies';
 
   useEffect(() => {
     async function searchFilmsById() {
@@ -53,7 +55,7 @@ const MovieDetails = () => {
 
   return (
     <main>
-      <button type="button">Go back</button>
+      <Link to={backLinkHref}>Go back</Link>
       <div
         style={{
           display: 'flex',
@@ -82,15 +84,20 @@ const MovieDetails = () => {
 
       <div>
         <h3>Additional information</h3>
-        <ul>
+        <ul
+          style={{
+            listStyle: 'none',
+          }}
+        >
           <li>
-            <p>Cast</p>
+            <Link to="cast">Cast</Link>
           </li>
           <li>
-            <p>Revievs</p>
+            <Link to="reviews">Reviews</Link>
           </li>
         </ul>
       </div>
+      <Outlet />
     </main>
   );
 };

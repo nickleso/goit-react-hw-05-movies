@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-// import { useSearchParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import SerchBar from 'components/SerchBar/SerchBar';
 import fetchFilmsByQuery from 'MoviesAPI/fetchFilmsByQuery';
@@ -7,7 +7,7 @@ import fetchFilmsByQuery from 'MoviesAPI/fetchFilmsByQuery';
 const Movies = () => {
   const [filmName, setFilmName] = useState('');
   const [filmsByQ, setFilmsByQ] = useState([]);
-  // const [page, setPage] = useState(1);
+  const location = useLocation();
 
   useEffect(() => {
     if (!filmName) {
@@ -37,7 +37,6 @@ const Movies = () => {
     }
 
     setFilmName(searchFilm);
-    // setPage(1);
     setFilmsByQ([]);
   };
 
@@ -48,7 +47,9 @@ const Movies = () => {
         {filmsByQ.length > 0 &&
           filmsByQ.map(({ id, title, name }) => (
             <li key={id}>
-              <Link to={`${id}`}>{title || name}</Link>
+              <Link to={`${id}`} state={{ from: location }}>
+                {title || name}
+              </Link>
             </li>
           ))}
       </ul>

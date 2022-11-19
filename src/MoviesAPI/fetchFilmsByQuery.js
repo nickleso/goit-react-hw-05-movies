@@ -7,7 +7,6 @@ async function fetchFilmsByQuery(query) {
   // &page=${page}
 
   const { data } = await axios.get(url);
-
   return data;
 }
 

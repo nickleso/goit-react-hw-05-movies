@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import fetchPopFilms from 'MoviesAPI/fetchPopularFilms';
 
 const PopularFilms = () => {
   const [popFilms, setPopFilms] = useState([]);
+  const location = useLocation();
 
   useEffect(() => {
     async function searchPopularFilms() {
       try {
         const films = await fetchPopFilms(1);
-        console.log(films.results);
 
         setPopFilms(films.results);
       } catch (error) {
@@ -27,7 +27,9 @@ const PopularFilms = () => {
         {popFilms.length > 0 &&
           popFilms.map(({ id, title, name }) => (
             <li key={id}>
-              <Link to={`${id}`}>{title || name}</Link>
+              <Link to={`movies/${id}`} state={{ from: location }}>
+                {title || name}
+              </Link>
             </li>
           ))}
       </ul>
