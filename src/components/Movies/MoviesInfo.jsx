@@ -48,12 +48,12 @@ const MoviesInfo = ({ filmInfo, state }) => {
         <h3>Additional information</h3>
         <ul>
           <li>
-            <Link to="cast" style={{ color: '#1a7ac8' }}>
+            <Link to="cast" state={state} style={{ color: '#1a7ac8' }}>
               Cast
             </Link>
           </li>
           <li>
-            <Link to="reviews" style={{ color: '#1a7ac8' }}>
+            <Link to="reviews" state={state} style={{ color: '#1a7ac8' }}>
               Reviews
             </Link>
           </li>

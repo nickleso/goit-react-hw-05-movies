@@ -49,7 +49,7 @@ const MovieDetails = () => {
         Go back
       </Link>
 
-      <MoviesInfo filmInfo={filmInfo} />
+      <MoviesInfo filmInfo={filmInfo} state={{ from: location }} />
 
       <Suspense fallback={<Loader />}>
         <Outlet />

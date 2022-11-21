@@ -26,7 +26,7 @@ const Reviews = () => {
 
   return (
     <div>
-      {reviews.length < 1 && <p>We don’t have any reviews for this movie.</p>}
+      {reviews.length < 1 && <p>We don't have any reviews for this movie.</p>}
       <ul
         style={{
           display: 'flex',
