@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { StyledDiv, StyledLink } from './Movies.styled';
 
 const BASE_IMAGES_URL = 'https://image.tmdb.org/t/p/w400';
 
@@ -16,14 +16,8 @@ const MoviesInfo = ({ filmInfo, state }) => {
   } = filmInfo;
 
   return (
-    <>
-      <div
-        style={{
-          paddingTop: 16,
-          display: 'flex',
-          gap: 10,
-        }}
-      >
+    <div style={{ paddingTop: 16 }}>
+      <StyledDiv>
         <img
           width="200px"
           src={BASE_IMAGES_URL + poster_path}
@@ -42,24 +36,24 @@ const MoviesInfo = ({ filmInfo, state }) => {
           <h3>Genres</h3>
           <p>{genres.map(genre => genre.name).join(' ')}</p>
         </div>
-      </div>
+      </StyledDiv>
 
       <div>
         <h3>Additional information</h3>
         <ul>
           <li>
-            <Link to="cast" state={state} style={{ color: '#1a7ac8' }}>
+            <StyledLink to="cast" state={state}>
               Cast
-            </Link>
+            </StyledLink>
           </li>
           <li>
-            <Link to="reviews" state={state} style={{ color: '#1a7ac8' }}>
+            <StyledLink to="reviews" state={state}>
               Reviews
-            </Link>
+            </StyledLink>
           </li>
         </ul>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -1,19 +1,13 @@
-import { Link } from 'react-router-dom';
+import { StyledLink } from './Movies.styled';
 
 const MoviesList = ({ visibleMovies, state }) => {
   return (
     <ul>
       {visibleMovies.map(({ id, title, name }) => (
         <li key={id}>
-          <Link
-            to={`${id}`}
-            state={state}
-            style={{
-              color: '#058bf8',
-            }}
-          >
+          <StyledLink to={`${id}`} state={state}>
             {title || name}
-          </Link>
+          </StyledLink>
         </li>
       ))}
     </ul>

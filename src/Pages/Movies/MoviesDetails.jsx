@@ -1,9 +1,10 @@
 import { useState, useEffect, Suspense } from 'react';
-import { Link, Outlet, useParams, useLocation } from 'react-router-dom';
+import { Outlet, useParams, useLocation } from 'react-router-dom';
 import { Loader } from 'components/Loader/Loader';
 import fetchFilmsById from 'MoviesAPI/fetchFilmsById';
 import { BiLeftArrowCircle } from 'react-icons/bi';
 import MoviesInfo from 'components/Movies/MoviesInfo';
+import { BackLink } from 'components/Movies/Movies.styled';
 
 const MovieDetails = () => {
   const { id } = useParams();
@@ -31,23 +32,10 @@ const MovieDetails = () => {
 
   return (
     <main>
-      <Link
-        to={backLinkHref}
-        style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          justifyContent: 'space-around',
-          border: '1px solid blue',
-          borderColor: '#1a7ac8',
-          borderRadius: 5,
-          width: 100,
-          height: 40,
-          color: '#1a7ac8',
-        }}
-      >
+      <BackLink to={backLinkHref}>
         <BiLeftArrowCircle size={20} />
         Go back
-      </Link>
+      </BackLink>
 
       <MoviesInfo filmInfo={filmInfo} state={{ from: location }} />
 
