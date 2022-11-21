@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import SerchBar from 'components/SerchBar/SerchBar';
 import fetchFilmsByQuery from 'MoviesAPI/fetchFilmsByQuery';
+import MoviesList from 'components/Movies/MoviesList';
 
 const Movies = () => {
   const [filmName, setFilmName] = useState('');
@@ -31,6 +31,10 @@ const Movies = () => {
     fetchFilms();
   }, [filmName]);
 
+  const visibleMovies = useMemo(() => {
+    return filmsByQ.filter(film => film.title.toLowerCase().includes(filmName));
+  }, [filmsByQ, filmName]);
+
   const handleFormSubmit = searchFilm => {
     if (searchFilm === filmName) {
       return;
@@ -43,16 +47,10 @@ const Movies = () => {
   return (
     <main>
       <SerchBar onSubmit={handleFormSubmit} />
-      <ul>
-        {filmsByQ.length > 0 &&
-          filmsByQ.map(({ id, title, name }) => (
-            <li key={id}>
-              <Link to={`${id}`} state={{ from: location }}>
-                {title || name}
-              </Link>
-            </li>
-          ))}
-      </ul>
+
+      {visibleMovies.length > 0 && (
+        <MoviesList visibleMovies={visibleMovies} state={{ from: location }} />
+      )}
     </main>
   );
 };

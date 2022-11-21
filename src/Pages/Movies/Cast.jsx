@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import fetchFilmsCredits from 'MoviesAPI/fetchFilmsCredits';
-// import * as defaultPicture from '../../images/film-default.jpg';
 
 const BASE_IMAGES_URL = 'https://image.tmdb.org/t/p/w400';
 
@@ -13,8 +12,6 @@ const Cast = () => {
     async function searchFilmsById() {
       try {
         const filmCast = await fetchFilmsCredits(id);
-
-        console.log(filmCast.cast);
 
         setCast(filmCast.cast);
       } catch (error) {

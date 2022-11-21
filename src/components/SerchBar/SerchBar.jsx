@@ -1,37 +1,46 @@
-import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { StyledButton, StyledForm, StyledInput } from './SerchBar.styled';
+import { MdSavedSearch } from 'react-icons/md';
 
 const SerchBar = ({ onSubmit }) => {
-  const [searchFilm, setSearchFilm] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const name = searchParams.get('name') ?? '';
 
   const handleFilmChange = event => {
-    setSearchFilm(event.currentTarget.value.toLowerCase());
+    const normilizedEventValue = event.target.value.toLowerCase();
+
+    const nextName =
+      normilizedEventValue !== '' ? { name: normilizedEventValue } : {};
+
+    setSearchParams(nextName);
   };
 
   const handleSubmit = event => {
     event.preventDefault();
 
-    if (searchFilm.trim() === '') {
+    if (name.trim() === '') {
       return alert('Please, enter film name.');
     }
 
-    onSubmit(searchFilm);
-
-    setSearchFilm('');
+    onSubmit(name);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
+    <StyledForm onSubmit={handleSubmit}>
+      <StyledInput
         type="text"
         name="film"
-        value={searchFilm}
+        value={name}
         autoComplete="off"
         autoFocus
         placeholder="Search films"
         onChange={handleFilmChange}
       />
-      <button type="submit">Search</button>
-    </form>
+      <StyledButton type="submit">
+        <MdSavedSearch size={20} />
+        Search
+      </StyledButton>
+    </StyledForm>
   );
 };
 
