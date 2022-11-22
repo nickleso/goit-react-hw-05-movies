@@ -1,8 +1,11 @@
+import { useLocation } from 'react-router-dom';
 import { StyledDiv, StyledLink } from './Movies.styled';
 
 const BASE_IMAGES_URL = 'https://image.tmdb.org/t/p/w400';
 
-const MoviesInfo = ({ filmInfo, state }) => {
+const MoviesInfo = ({ filmInfo }) => {
+  const location = useLocation();
+
   const {
     poster_path,
     title,
@@ -42,12 +45,12 @@ const MoviesInfo = ({ filmInfo, state }) => {
         <h3>Additional information</h3>
         <ul>
           <li>
-            <StyledLink to="cast" state={state}>
+            <StyledLink to="cast" state={{ from: location.state.from }}>
               Cast
             </StyledLink>
           </li>
           <li>
-            <StyledLink to="reviews" state={state}>
+            <StyledLink to="reviews" state={{ from: location.state.from }}>
               Reviews
             </StyledLink>
           </li>
