@@ -1,12 +1,13 @@
 import { useState, useEffect, useMemo } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useSearchParams, useLocation } from 'react-router-dom';
 import SerchBar from 'components/SerchBar/SerchBar';
 import fetchFilmsByQuery from 'MoviesAPI/fetchFilmsByQuery';
 import MoviesList from 'components/Movies/MoviesList';
 
 const Movies = () => {
-  const [filmName, setFilmName] = useState('');
   const [filmsByQ, setFilmsByQ] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const filmName = searchParams.get('name') ?? '';
   const location = useLocation();
 
   useEffect(() => {
@@ -35,20 +36,27 @@ const Movies = () => {
     return filmsByQ.filter(film => film.title.toLowerCase().includes(filmName));
   }, [filmsByQ, filmName]);
 
-  const handleFormSubmit = searchFilm => {
-    if (searchFilm === filmName) {
-      return;
+  const handleFormSubmit = event => {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const normilizedValue = form.elements.filmInput.value.toLowerCase();
+
+    if (normilizedValue.trim() === '') {
+      return alert('Please, enter film name.');
     }
 
-    setFilmName(searchFilm);
-    setFilmsByQ([]);
+    const searchName =
+      normilizedValue !== '' ? { name: normilizedValue.trim() } : {};
+
+    setSearchParams(searchName);
   };
 
   return (
     <main>
       <SerchBar onSubmit={handleFormSubmit} />
 
-      {visibleMovies.length > 0 && (
+      {visibleMovies && (
         <MoviesList visibleMovies={visibleMovies} state={{ from: location }} />
       )}
     </main>
