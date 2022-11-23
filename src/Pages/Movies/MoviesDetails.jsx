@@ -1,7 +1,7 @@
 import { useState, useEffect, Suspense } from 'react';
 import { Outlet, useParams, useLocation } from 'react-router-dom';
 import { Loader } from 'components/Loader/Loader';
-import fetchFilmsById from 'MoviesAPI/fetchFilmsById';
+import { fetchFilmsById } from 'MoviesAPI/fetchFilms';
 import { BiLeftArrowCircle } from 'react-icons/bi';
 import MoviesInfo from 'components/Movies/MoviesInfo';
 import { BackLink } from 'components/Movies/Movies.styled';
@@ -10,7 +10,7 @@ const MovieDetails = () => {
   const { id } = useParams();
   const [filmInfo, setFilmInfo] = useState(null);
   const location = useLocation();
-  const backLinkHref = location.state?.from ?? '/movies';
+  const backLinkHref = location?.state?.from ?? '/movies';
 
   useEffect(() => {
     async function searchFilmsById() {

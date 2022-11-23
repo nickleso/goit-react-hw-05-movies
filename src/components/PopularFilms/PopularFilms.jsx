@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import fetchPopFilms from 'MoviesAPI/fetchPopularFilms';
+import { fetchPopFilms } from 'MoviesAPI/fetchFilms';
 import PopularMoviesList from './PopularFilmsList';
 
 const PopularFilms = () => {

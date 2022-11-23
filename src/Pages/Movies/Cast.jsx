@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import fetchFilmsCredits from 'MoviesAPI/fetchFilmsCredits';
+import { fetchFilmsCredits } from 'MoviesAPI/fetchFilms';
 
 const BASE_IMAGES_URL = 'https://image.tmdb.org/t/p/w400';
 

@@ -45,12 +45,12 @@ const MoviesInfo = ({ filmInfo }) => {
         <h3>Additional information</h3>
         <ul>
           <li>
-            <StyledLink to="cast" state={{ from: location.state.from }}>
+            <StyledLink to="cast" state={{ from: location?.state?.from }}>
               Cast
             </StyledLink>
           </li>
           <li>
-            <StyledLink to="reviews" state={{ from: location.state.from }}>
+            <StyledLink to="reviews" state={{ from: location?.state?.from }}>
               Reviews
             </StyledLink>
           </li>

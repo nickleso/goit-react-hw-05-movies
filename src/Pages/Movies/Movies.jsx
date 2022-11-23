@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useSearchParams, useLocation } from 'react-router-dom';
+import { fetchFilmsByQuery } from 'MoviesAPI/fetchFilms';
 import SerchBar from 'components/SerchBar/SerchBar';
-import fetchFilmsByQuery from 'MoviesAPI/fetchFilmsByQuery';
 import MoviesList from 'components/Movies/MoviesList';
 
 const Movies = () => {
