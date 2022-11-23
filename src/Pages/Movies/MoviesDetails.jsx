@@ -24,7 +24,7 @@ const MovieDetails = () => {
     }
 
     searchFilmsById();
-  }, [id, setFilmInfo]);
+  }, [id]);
 
   if (!filmInfo) {
     return null;

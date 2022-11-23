@@ -6,7 +6,7 @@ const BASE_IMAGES_URL = 'https://image.tmdb.org/t/p/w400';
 
 const Cast = () => {
   const { id } = useParams();
-  const [cast, setCast] = useState(null);
+  const [cast, setCast] = useState([]);
 
   useEffect(() => {
     async function searchFilmsById() {
@@ -20,24 +20,22 @@ const Cast = () => {
     }
 
     searchFilmsById();
-  }, [id, setCast]);
-
-  if (!cast) {
-    return null;
-  }
+  }, [id]);
 
   return (
     <div>
-      <ul
-        style={{
-          display: 'flex',
-          gap: 6,
-          flexWrap: 'wrap',
-          listStyle: 'none',
-        }}
-      >
-        {cast.length > 0 &&
-          cast.map(({ id, original_name, name, profile_path }) => (
+      {cast.length < 1 && <p>No information about the cast for this movie.</p>}
+
+      {cast.length > 0 && (
+        <ul
+          style={{
+            display: 'flex',
+            gap: 6,
+            flexWrap: 'wrap',
+            listStyle: 'none',
+          }}
+        >
+          {cast.map(({ id, original_name, name, profile_path }) => (
             <li
               key={id}
               style={{
@@ -56,7 +54,8 @@ const Cast = () => {
               <h4>{name || original_name || 'no info'}</h4>
             </li>
           ))}
-      </ul>
+        </ul>
+      )}
     </div>
   );
 };

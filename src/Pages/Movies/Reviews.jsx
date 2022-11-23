@@ -4,7 +4,7 @@ import { fetchFilmsReviews } from 'MoviesAPI/fetchFilms';
 
 const Reviews = () => {
   const { id } = useParams();
-  const [reviews, setReviews] = useState(null);
+  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     async function searchFilmsById() {
@@ -18,31 +18,29 @@ const Reviews = () => {
     }
 
     searchFilmsById();
-  }, [id, setReviews]);
-
-  if (!reviews) {
-    return null;
-  }
+  }, [id]);
 
   return (
     <div>
       {reviews.length < 1 && <p>We don't have any reviews for this movie.</p>}
-      <ul
-        style={{
-          display: 'flex',
-          gap: 6,
-          flexWrap: 'wrap',
-          listStyle: 'none',
-        }}
-      >
-        {reviews.length > 0 &&
-          reviews.map(({ id, author, content }) => (
+
+      {reviews.length > 0 && (
+        <ul
+          style={{
+            display: 'flex',
+            gap: 6,
+            flexWrap: 'wrap',
+            listStyle: 'none',
+          }}
+        >
+          {reviews.map(({ id, author, content }) => (
             <li key={id}>
               <h3>{author || 'no info'}</h3>
               <p>{content || 'no info'}</p>
             </li>
           ))}
-      </ul>
+        </ul>
+      )}
     </div>
   );
 };

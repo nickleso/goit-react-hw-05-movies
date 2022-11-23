@@ -23,7 +23,11 @@ const MoviesInfo = ({ filmInfo }) => {
       <StyledDiv>
         <img
           width="200px"
-          src={BASE_IMAGES_URL + poster_path}
+          src={
+            poster_path
+              ? BASE_IMAGES_URL + poster_path
+              : 'https://dummyimage.com/200x300/bab8ba/000&text=no+photo'
+          }
           alt={title || name}
         />
         <div>
